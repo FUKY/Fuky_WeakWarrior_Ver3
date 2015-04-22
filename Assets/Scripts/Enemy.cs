@@ -17,7 +17,6 @@ public class Enemy : MonoBehaviour {
         animatorEnemy = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
         //frontCheck = transform.Find("frontCheck").transform;
-        rb2d.velocity = new Vector2(speed, 0f);
         attackEnemyState = Animator.StringToHash("attackEnemy");
 
     }
@@ -66,4 +65,20 @@ public class Enemy : MonoBehaviour {
             Hurt();
         }
     }
+
+    public void SetVellocity(bool left)
+    {
+        rb2d = GetComponent<Rigidbody2D>();
+        if (left)
+        {
+            transform.localScale = new Vector2(1, 1);
+            rb2d.velocity = new Vector2(speed, 0f);
+        }
+        else
+        {
+            transform.localScale = new Vector2(-1, 1);
+            rb2d.velocity = new Vector2(-speed, 0f);
+        }
+    }
+
 }
