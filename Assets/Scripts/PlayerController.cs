@@ -12,8 +12,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject deathArea;
 
-    public bool attack;
-    public int HPPlayer;
+    public bool attackPlayer;
 
     void Start()
     {
@@ -39,14 +38,14 @@ public class PlayerController : MonoBehaviour
 
     public void AttackOn()
     {
-        attack = true;
-        deathArea.SetActive(attack);
+        attackPlayer = true;
+        deathArea.SetActive(attackPlayer);
     }
 
     public void AttackOff()
     {
-        attack = false;
-        deathArea.SetActive(attack);
+        attackPlayer = false;
+        deathArea.SetActive(attackPlayer);
     }
 
     void HurtPlayer()

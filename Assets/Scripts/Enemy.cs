@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour {
     private int attackEnemyState;
 
     //private Transform frontCheck;
-    private bool attack;
+    private bool attackEnemy;
 
     public GameObject attackArea;
 
@@ -20,7 +20,6 @@ public class Enemy : MonoBehaviour {
         rb2d = GetComponent<Rigidbody2D>();
         //frontCheck = transform.Find("frontCheck").transform;
         attackEnemyState = Animator.StringToHash("attackEnemy");
-        rb2d.velocity = new Vector2(2f, 0f);
     }
 
     //void FixedUpdate()
@@ -84,12 +83,12 @@ public class Enemy : MonoBehaviour {
     }
     public void AttackOff()
     {
-        attack = false;
+        attackEnemy = false;
         attackArea.SetActive(false);
     }
     public void AttackOn()
     {
-        attack = true;
+        attackEnemy = true;
         attackArea.SetActive(true);
     }
 
