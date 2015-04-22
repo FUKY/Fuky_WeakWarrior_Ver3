@@ -2,15 +2,17 @@
 using System.Collections;
 
 public class Enemy : MonoBehaviour {
-    private float speed = 2f;
+    public float speed;
     private Rigidbody2D rb2d;
     private Animator animatorEnemy;
-    public int HP;
+    public int HPEnemy;
 
     private int attackEnemyState;
 
     //private Transform frontCheck;
-    private bool attacked;
+    private bool attack;
+
+    public GameObject attackArea;
 
     void Start()
     {
@@ -18,7 +20,7 @@ public class Enemy : MonoBehaviour {
         rb2d = GetComponent<Rigidbody2D>();
         //frontCheck = transform.Find("frontCheck").transform;
         attackEnemyState = Animator.StringToHash("attackEnemy");
-
+        rb2d.velocity = new Vector2(2f, 0f);
     }
 
     //void FixedUpdate()
@@ -42,15 +44,15 @@ public class Enemy : MonoBehaviour {
     void Update()
     {
         //Enemy1 bị chém trúng
-        if (HP <= 0)
+        if (HPEnemy <= 0)
         {
             Destroy(gameObject);
         }
     }
 
-    void Hurt()
+    void HurtEnemy()
     {
-        HP--;
+        HPEnemy--;
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -62,7 +64,7 @@ public class Enemy : MonoBehaviour {
         }
         if (col.tag == "DeathArea")
         {
-            Hurt();
+            HurtEnemy();
         }
     }
 
@@ -79,6 +81,16 @@ public class Enemy : MonoBehaviour {
             transform.localScale = new Vector2(-1, 1);
             rb2d.velocity = new Vector2(-speed, 0f);
         }
+    }
+    public void AttackOff()
+    {
+        attack = false;
+        attackArea.SetActive(false);
+    }
+    public void AttackOn()
+    {
+        attack = true;
+        attackArea.SetActive(true);
     }
 
 }

@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public GameObject deathArea;
 
     public bool attack;
+    public int HPPlayer;
 
     void Start()
     {
@@ -47,4 +48,26 @@ public class PlayerController : MonoBehaviour
         attack = false;
         deathArea.SetActive(attack);
     }
+
+    void HurtPlayer()
+    {
+        state--;
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.tag == "AttackArea")
+        {
+            if (state <= 0)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                state--;
+                animatorPlayer.runtimeAnimatorController = listAnimator[state];
+            }
+        }
+    }
+   
 }
