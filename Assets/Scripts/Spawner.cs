@@ -9,9 +9,9 @@ public class Spawner : MonoBehaviour
     public Vector2 posSpawnLeft;
     public Vector2 posSpawnRight;
 
-    //public EnemyController[] enemies;
+    //public Enemy[] enemies;
     //public int index;
-    public GameObject enemyPrefab;
+    public GameObject[] enemyPrefab;
 
     void Start()
     {
@@ -33,18 +33,18 @@ public class Spawner : MonoBehaviour
     void SpawnLeft()
     {
         // Random loại enemy
-        //int enemyIndex = Random.Range(0, enemies.Length);
-        GameObject enemyObj = Instantiate(enemyPrefab, posSpawnLeft, Quaternion.identity) as GameObject;
+        int enemyIndex = Random.Range(0, enemyPrefab.Length);
+        GameObject enemyObj = Instantiate(enemyPrefab[enemyIndex], posSpawnLeft, Quaternion.identity) as GameObject;
         enemyObj.GetComponent<Enemy>().SetVellocity(true);
-
+        enemyObj.GetComponent<Enemy2>().SetVellocity(true);
     }
 
     void SpawnRight()
     {
         // Random loại enemy
-        //int enemyIndex = Random.Range(0, enemies.Length);
-        GameObject enemyObj = Instantiate(enemyPrefab, posSpawnRight, Quaternion.identity) as GameObject;
+        int enemyIndex = Random.Range(0, enemyPrefab.Length);
+        GameObject enemyObj = Instantiate(enemyPrefab[enemyIndex], posSpawnRight, Quaternion.identity) as GameObject;
         enemyObj.GetComponent<Enemy>().SetVellocity(false);
-
+        enemyObj.GetComponent<Enemy2>().SetVellocity(false);
     }
 }
