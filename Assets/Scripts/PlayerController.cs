@@ -12,13 +12,12 @@ public class PlayerController : MonoBehaviour
 
     public GameObject deathArea;
 
-    public bool attackPlayer;
-
     void Start()
     {
         animatorPlayer = GetComponent<Animator>();
         animatorPlayer.runtimeAnimatorController = listAnimator[state];
         attackPlayerState = Animator.StringToHash("attackPlayer");
+        deathArea.SetActive(false);
     }
     
     public void FlipLeft()
@@ -38,19 +37,12 @@ public class PlayerController : MonoBehaviour
 
     public void AttackOn()
     {
-        attackPlayer = true;
-        deathArea.SetActive(attackPlayer);
+        deathArea.SetActive(true);
     }
 
     public void AttackOff()
     {
-        attackPlayer = false;
-        deathArea.SetActive(attackPlayer);
-    }
-
-    void HurtPlayer()
-    {
-        state--;
+        deathArea.SetActive(false);
     }
 
     void OnTriggerEnter2D(Collider2D col)

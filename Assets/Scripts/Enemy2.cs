@@ -1,31 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour {
+public class Enemy2 : MonoBehaviour {
     public float speed;
     private Rigidbody2D rb2d;
     private Animator animatorEnemy;
     public int HPEnemy;
-
-    private int attackEnemyState;
-
+    
     public GameObject attackArea;
 
     private Score score;
-
+    
     void Start()
     {
         animatorEnemy = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
-        attackEnemyState = Animator.StringToHash("attackEnemy");
-
+        rb2d.velocity = new Vector2(2f, 0f);
         score = GameObject.Find("Score").GetComponent<Score>();
     }
 
-
     void Update()
     {
-        //Enemy1 bị chém trúng
         if (HPEnemy <= 0)
         {
             Destroy(gameObject);
@@ -42,29 +37,20 @@ public class Enemy : MonoBehaviour {
     {
         if (col.tag == "Player")
         {
-            animatorEnemy.SetTrigger(attackEnemyState);
+            animatorEnemy.SetTrigger("attackEnemy");
             rb2d.velocity = new Vector2(0f, 0f);
+            
         }
         if (col.tag == "DeathArea")
         {
             HurtEnemy();
+            animatorEnemy.SetTrigger("downEnemy");
+            rb2d.velocity = new Vector2(-3f, 0f);
+            //transform.position = new Vector2(-2f, -0.8f);
+            Debug.Log(HPEnemy);
         }
     }
 
-    public void SetVellocity(bool left)
-    {
-        rb2d = GetComponent<Rigidbody2D>();
-        if (left)
-        {
-            transform.localScale = new Vector2(1, 1);
-            rb2d.velocity = new Vector2(speed, 0f);
-        }
-        else
-        {
-            transform.localScale = new Vector2(-1, 1);
-            rb2d.velocity = new Vector2(-speed, 0f);
-        }
-    }
     public void AttackOff()
     {
         attackArea.SetActive(false);
@@ -74,4 +60,10 @@ public class Enemy : MonoBehaviour {
         attackArea.SetActive(true);
     }
 
+    public void IdleOn()
+    {
+        animatorEnemy.SetTrigger("idleEnemy");
+        attackArea.SetActive(false);
+        rb2d.velocity = new Vector2(2f, 0f);
+    }
 }

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 0fe38a378e3cda74189a0fd1583d0031
-timeCreated: 1429901730
+timeCreated: 1430021551
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -82,7 +82,7 @@ TextureImporter:
         width: 45
         height: 51
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: M_skell_warrior_01(110x74)_2
       rect:
@@ -92,7 +92,7 @@ TextureImporter:
         width: 43
         height: 49
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: M_skell_warrior_01(110x74)_3
       rect:
@@ -102,7 +102,7 @@ TextureImporter:
         width: 45
         height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: M_skell_warrior_01(110x74)_4
       rect:
@@ -112,7 +112,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: M_skell_warrior_01(110x74)_5
       rect:
@@ -122,7 +122,7 @@ TextureImporter:
         width: 43
         height: 27
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: M_skell_warrior_01(110x74)_6
       rect:
@@ -157,32 +157,12 @@ TextureImporter:
     - name: M_skell_warrior_01(110x74)_9
       rect:
         serializedVersion: 2
-        x: 132
-        y: 178
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: M_skell_warrior_01(110x74)_10
-      rect:
-        serializedVersion: 2
-        x: 167
-        y: 176
-        width: 18
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: M_skell_warrior_01(110x74)_11
-      rect:
-        serializedVersion: 2
-        x: 171
-        y: 161
-        width: 8
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 120
+        y: 151
+        width: 65
+        height: 59
+      alignment: 9
+      pivot: {x: .370000005, y: .423700005}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: M_skell_warrior_01(110x74)_12
       rect:
