@@ -76,6 +76,6 @@ public class Enemy2 : MonoBehaviour {
     {
         animatorEnemy.SetTrigger("idleEnemy");
         attackArea.SetActive(false);
-        rb2d.velocity = new Vector2(2f, 0f);
+        rb2d.velocity = new Vector2(1f, 0f);
     }
 }

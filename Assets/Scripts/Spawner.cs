@@ -49,7 +49,7 @@ public class Spawner : MonoBehaviour
         GameObject enemyObj1 = Instantiate(enemy1, posSpawnRight, transform.rotation) as GameObject;
         enemyObj1.GetComponent<Enemy>().SetVellocity(false);
 
-        GameObject enemyObj2 = Instantiate(enemy2, posSpawnRight, transform.rotation) as GameObject;
-        enemyObj2.GetComponent<Enemy2>().SetVellocity(false);
+        //GameObject enemyObj2 = Instantiate(enemy2, posSpawnRight, transform.rotation) as GameObject;
+        //enemyObj2.GetComponent<Enemy2>().SetVellocity(false);
     }
 }

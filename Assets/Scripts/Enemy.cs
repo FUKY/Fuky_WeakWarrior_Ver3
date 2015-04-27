@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour {
         rb2d = GetComponent<Rigidbody2D>();
         //frontCheck = transform.Find("frontCheck").transform;
 
-        rb2d.velocity = new Vector2(speed, 0f);
+        //rb2d.velocity = new Vector2(speed, 0f);
         score = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
