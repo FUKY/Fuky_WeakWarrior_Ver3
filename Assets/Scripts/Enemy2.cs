@@ -9,14 +9,14 @@ public class Enemy2 : MonoBehaviour {
     
     public GameObject attackArea;
 
-    private Score score;
+    private GameController score;
     
     void Start()
     {
         animatorEnemy = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
         //rb2d.velocity = new Vector2(2f, 0f);
-        score = GameObject.Find("Score").GetComponent<Score>();
+        score = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
     void Update()
@@ -24,7 +24,7 @@ public class Enemy2 : MonoBehaviour {
         if (HPEnemy <= 0)
         {
             Destroy(gameObject);
-            score.score += 1;
+            score.score++;
         }
     }
 
@@ -40,13 +40,12 @@ public class Enemy2 : MonoBehaviour {
             animatorEnemy.SetTrigger("attackEnemy");
             rb2d.velocity = new Vector2(0f, 0f);
         }
-            if (col.tag=="DeathArea")
-            {
-                HurtEnemy();
-                animatorEnemy.SetTrigger("downEnemy");
-                rb2d.velocity = new Vector2(-2f, 0f);
-                Debug.Log(HPEnemy);
-            }
+        if (col.tag == "DeathArea")
+        {
+            HurtEnemy();
+            animatorEnemy.SetTrigger("downEnemy");
+            rb2d.velocity = new Vector2(-2f, 0f);
+        }
     }
 
     public void SetVellocity(bool left)

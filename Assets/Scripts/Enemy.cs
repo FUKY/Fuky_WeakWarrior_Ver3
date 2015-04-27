@@ -7,22 +7,21 @@ public class Enemy : MonoBehaviour {
     private Animator animatorEnemy;
     public int HPEnemy;
 
-    private int attackEnemyState;
 
     //private Transform frontCheck;
 
     public GameObject attackArea;
 
-    private Score score;
+    private GameController score;
 
     void Start()
     {
         animatorEnemy = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
         //frontCheck = transform.Find("frontCheck").transform;
-        attackEnemyState = Animator.StringToHash("attackEnemy");
 
-        score = GameObject.Find("Score").GetComponent<Score>();
+        rb2d.velocity = new Vector2(speed, 0f);
+        score = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
     //void FixedUpdate()
@@ -49,7 +48,7 @@ public class Enemy : MonoBehaviour {
         if (HPEnemy <= 0)
         {
             Destroy(gameObject);
-            score.score += 1;
+            score.score ++;
         }
     }
 
@@ -62,7 +61,7 @@ public class Enemy : MonoBehaviour {
     {
         if (col.tag == "Player")
         {
-            animatorEnemy.SetTrigger(attackEnemyState);
+            animatorEnemy.SetTrigger("attackEnemy");
             rb2d.velocity = new Vector2(0f, 0f);
         }
         if (col.tag == "DeathArea")

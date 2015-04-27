@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,27 +13,40 @@ public class PlayerController : MonoBehaviour
 
     public GameObject deathArea;
 
+    public bool dead;
+
     void Start()
     {
         animatorPlayer = GetComponent<Animator>();
         animatorPlayer.runtimeAnimatorController = listAnimator[state];
         attackPlayerState = Animator.StringToHash("attackPlayer");
         deathArea.SetActive(false);
+
     }
     
     public void FlipLeft()
     {
-        animatorPlayer.SetTrigger(attackPlayerState);
-        Vector3 theScale = transform.localScale;
-        theScale.x = -1;
-        transform.localScale = theScale;        
+        if (animatorPlayer == null)
+            return;
+        else
+        {
+            animatorPlayer.SetTrigger(attackPlayerState);
+            Vector3 theScale = transform.localScale;
+            theScale.x = -1;
+            transform.localScale = theScale;
+        }
     }
     public void FlipRight()
     {
-        animatorPlayer.SetTrigger(attackPlayerState);
-        Vector3 theScale = transform.localScale;
-        theScale.x = 1;
-        transform.localScale = theScale;
+        if (animatorPlayer == null)
+            return;
+        else
+        {
+            animatorPlayer.SetTrigger(attackPlayerState);
+            Vector3 theScale = transform.localScale;
+            theScale.x = 1;
+            transform.localScale = theScale;
+        }
     }
 
     public void AttackOn()
@@ -52,6 +66,7 @@ public class PlayerController : MonoBehaviour
             if (state <= 0)
             {
                 Destroy(gameObject);
+                dead = true;
             }
             else
             {
