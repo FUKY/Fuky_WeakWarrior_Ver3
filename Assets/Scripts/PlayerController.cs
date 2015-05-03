@@ -12,8 +12,16 @@ public class PlayerController : MonoBehaviour
     static int attackPlayerState;
 
     public GameObject deathArea;
+    public GameObject deathAreaSkill;
 
     public bool dead;
+
+    private Rigidbody2D rb2dPlayer;
+
+    private bool temp;
+    private float waitTime;
+    public float skillTime;
+    public bool skillIsOn;
 
     void Start()
     {
@@ -21,7 +29,24 @@ public class PlayerController : MonoBehaviour
         animatorPlayer.runtimeAnimatorController = listAnimator[state];
         attackPlayerState = Animator.StringToHash("attackPlayer");
         deathArea.SetActive(false);
-
+        deathAreaSkill.SetActive(false);
+        rb2dPlayer = GetComponent<Rigidbody2D>();
+    }
+    void Update()
+    {
+        if (transform.position.x <= -3f)
+        {
+            transform.position = new Vector2(3f, -0.6f);
+            temp = true;
+        }
+        if (temp == true && transform.position.x <= 0f)
+        {
+            rb2dPlayer.velocity = new Vector2(0f, 0f);
+            temp = false;
+            animatorPlayer.SetTrigger("skillPlayer");
+            animatorPlayer.speed = 1f;
+        }
+        
     }
     
     public void FlipLeft()
@@ -49,6 +74,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    
+
     public void AttackOn()
     {
         deathArea.SetActive(true);
@@ -57,6 +84,37 @@ public class PlayerController : MonoBehaviour
     public void AttackOff()
     {
         deathArea.SetActive(false);
+    }
+    public void SkillOff()
+    {
+        deathAreaSkill.SetActive(false);
+    }
+
+
+    public void SkillOn()
+    {
+        //deathArea.SetActive(true);
+        //deathArea.transform.position = new Vector2(-0.6f, 0.2f);
+        
+        //if (waitTime == skillTime)
+        //{
+        animatorPlayer.SetTrigger("skillPlayer");
+        skillIsOn = true;
+
+        //    //SkillOn();
+        //    waitTime = 0f;
+        //}
+        //else
+        //{
+        //    waitTime += Time.deltaTime;
+        //}
+    }
+    public void SkillLeft()
+    {
+        deathAreaSkill.transform.position = new Vector2(0.6f, -0.4f);
+        rb2dPlayer.velocity = new Vector2(-5f, 0f);
+        animatorPlayer.speed = 0f;
+        deathAreaSkill.SetActive(true);
     }
 
     void OnTriggerEnter2D(Collider2D col)

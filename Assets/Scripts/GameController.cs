@@ -20,8 +20,13 @@ public class GameController : MonoBehaviour {
         scoreText.text = "SCORE: " + score;
         if (player.dead == true)
         {
-            gameOver.text = "GAME OVER!\nYour Score: " + score;
-            Destroy(scoreText);
+            if (scoreText == null)
+                return;
+            else
+            {
+                gameOver.text = "GAME OVER!\nYour Score: " + score;
+                Destroy(scoreText);
+            }
         }
     }
 

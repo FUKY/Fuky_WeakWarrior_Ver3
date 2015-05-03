@@ -46,6 +46,10 @@ public class Enemy2 : MonoBehaviour {
             animatorEnemy.SetTrigger("downEnemy");
             rb2d.velocity = new Vector2(-2f, 0f);
         }
+        if (col.tag == "DeathAreaSkill")
+        {
+            HPEnemy = 0;
+        }
     }
 
     public void SetVellocity(bool left)

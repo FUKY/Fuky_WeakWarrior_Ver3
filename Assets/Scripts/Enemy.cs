@@ -68,6 +68,10 @@ public class Enemy : MonoBehaviour {
         {
             HurtEnemy();
         }
+        if (col.tag == "DeathAreaSkill")
+        {
+            HPEnemy = 0;
+        }
     }
 
     public void SetVellocity(bool left)
