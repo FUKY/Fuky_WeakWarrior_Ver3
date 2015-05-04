@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 using UnityEngine.UI;
@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     public float skillTime;
     public bool skillIsOn;
 
+    private ButtonSkillController buttonSkill;
+
     void Start()
     {
         animatorPlayer = GetComponent<Animator>();
@@ -31,6 +33,8 @@ public class PlayerController : MonoBehaviour
         deathArea.SetActive(false);
         deathAreaSkill.SetActive(false);
         rb2dPlayer = GetComponent<Rigidbody2D>();
+
+        buttonSkill=GameObject.Find("ButtonSkill").GetComponent<ButtonSkillController>();
     }
     void Update()
     {
@@ -88,31 +92,26 @@ public class PlayerController : MonoBehaviour
     public void SkillOff()
     {
         deathAreaSkill.SetActive(false);
+        skillIsOn = false;
     }
 
 
     public void SkillOn()
     {
-        //deathArea.SetActive(true);
-        //deathArea.transform.position = new Vector2(-0.6f, 0.2f);
-        
-        //if (waitTime == skillTime)
-        //{
-        animatorPlayer.SetTrigger("skillPlayer");
-        skillIsOn = true;
-
-        //    //SkillOn();
-        //    waitTime = 0f;
-        //}
-        //else
-        //{
-        //    waitTime += Time.deltaTime;
-        //}
+        if (buttonSkill.canSkill == true)
+        {
+            animatorPlayer.SetTrigger("skillPlayer");
+            skillIsOn = true;
+        }
+        else
+        {
+            skillIsOn = false;
+        }
     }
     public void SkillLeft()
     {
         deathAreaSkill.transform.position = new Vector2(0.6f, -0.4f);
-        rb2dPlayer.velocity = new Vector2(-5f, 0f);
+        rb2dPlayer.velocity = new Vector2(-10f, 0f);
         animatorPlayer.speed = 0f;
         deathAreaSkill.SetActive(true);
     }
@@ -130,6 +129,7 @@ public class PlayerController : MonoBehaviour
             {
                 state--;
                 animatorPlayer.runtimeAnimatorController = listAnimator[state];
+
             }
         }
     }
