@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour {
     public GameObject attackArea;
 
     private GameController score;
-
+    private PlayerController player;
     void Start()
     {
         animatorEnemy = GetComponent<Animator>();
@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour {
 
         //rb2d.velocity = new Vector2(speed, 0f);
         score = GameObject.Find("GameController").GetComponent<GameController>();
+
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     //void FixedUpdate()
@@ -50,6 +52,7 @@ public class Enemy : MonoBehaviour {
             Destroy(gameObject);
             score.score ++;
         }
+        Debug.Log(player.miss);
     }
 
     void HurtEnemy()
@@ -67,7 +70,10 @@ public class Enemy : MonoBehaviour {
         if (col.tag == "DeathArea")
         {
             HurtEnemy();
+            player.miss = false;
         }
+        else
+            player.miss = true;
         if (col.tag == "DeathAreaSkill")
         {
             HPEnemy = 0;

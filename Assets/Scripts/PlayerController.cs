@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System;
 using UnityEngine.UI;
@@ -18,12 +18,18 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb2dPlayer;
 
-    private bool temp;
+    private bool skilling;
     private float waitTime;
     public float skillTime;
     public bool skillIsOn;
+    private bool facingRight;
 
     private ButtonSkillController buttonSkill;
+
+    public bool miss;
+
+    private float timeAwake;
+    private bool missing;
 
     void Start()
     {
@@ -35,22 +41,58 @@ public class PlayerController : MonoBehaviour
         rb2dPlayer = GetComponent<Rigidbody2D>();
 
         buttonSkill=GameObject.Find("ButtonSkill").GetComponent<ButtonSkillController>();
+        
     }
     void Update()
     {
-        if (transform.position.x <= -3f)
+        //Bay qua phải
+        if (facingRight == true) 
         {
-            transform.position = new Vector2(3f, -0.6f);
-            temp = true;
+            if (transform.position.x >= 3f)
+            {
+                transform.position = new Vector2(-3f, -0.6f);
+                skilling = true;
+            }
+            if (skilling == true && transform.position.x >= 0f)
+            {
+                rb2dPlayer.velocity = new Vector2(0f, 0f);
+                skilling = false;
+                animatorPlayer.SetTrigger("skillPlayer");
+                animatorPlayer.speed = 1f;
+                SkillOff();
+            }
         }
-        if (temp == true && transform.position.x <= 0f)
+        else
         {
-            rb2dPlayer.velocity = new Vector2(0f, 0f);
-            temp = false;
-            animatorPlayer.SetTrigger("skillPlayer");
-            animatorPlayer.speed = 1f;
+            //Bay qua trái
+            if (transform.position.x <= -3f)
+            {
+                transform.position = new Vector2(3f, -0.6f);
+                skilling = true;
+            }
+            if (skilling == true && transform.position.x <= 0f)
+            {
+                rb2dPlayer.velocity = new Vector2(0f, 0f);
+                skilling = false;
+                animatorPlayer.SetTrigger("skillPlayer");
+                animatorPlayer.speed = 1f;
+                SkillOff();
+            }
         }
-        
+
+
+
+        //Chém miss thì Player bị dừng
+        if (missing == true)
+        {
+            if (timeAwake >= 0.5f)
+            {
+                animatorPlayer.speed = 1f;
+                timeAwake = 0f;
+            }
+            else
+                timeAwake += Time.deltaTime;
+        }
     }
     
     public void FlipLeft()
@@ -63,6 +105,7 @@ public class PlayerController : MonoBehaviour
             Vector3 theScale = transform.localScale;
             theScale.x = -1;
             transform.localScale = theScale;
+            facingRight = false;
         }
     }
     public void FlipRight()
@@ -75,6 +118,7 @@ public class PlayerController : MonoBehaviour
             Vector3 theScale = transform.localScale;
             theScale.x = 1;
             transform.localScale = theScale;
+            facingRight = true;
         }
     }
 
@@ -108,12 +152,37 @@ public class PlayerController : MonoBehaviour
             skillIsOn = false;
         }
     }
-    public void SkillLeft()
+    public void SkillActive()
     {
-        deathAreaSkill.transform.position = new Vector2(0.6f, -0.4f);
-        rb2dPlayer.velocity = new Vector2(-10f, 0f);
-        animatorPlayer.speed = 0f;
-        deathAreaSkill.SetActive(true);
+        if (facingRight == false)
+        {
+            deathAreaSkill.transform.position = new Vector2(0.6f, -0.4f);
+            rb2dPlayer.velocity = new Vector2(-10f, 0f);
+            animatorPlayer.speed = 0f;
+            deathAreaSkill.SetActive(true);
+        }
+        else
+        {
+            deathAreaSkill.transform.position = new Vector2(-0.6f, -0.4f);
+            rb2dPlayer.velocity = new Vector2(10f, 0f);
+            animatorPlayer.speed = 0f;
+            deathAreaSkill.SetActive(true);
+        }
+    }
+
+    public void ActtackMiss()
+    {
+        if (miss == true)
+        {
+            animatorPlayer.speed = 0;
+            deathArea.SetActive(false);
+            missing = true;
+        }
+    }
+
+    public void AttackNotMiss()
+    {
+        miss = false;
     }
 
     void OnTriggerEnter2D(Collider2D col)

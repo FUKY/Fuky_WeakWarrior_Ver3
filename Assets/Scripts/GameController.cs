@@ -16,8 +16,12 @@ public class GameController : MonoBehaviour {
     }
 
     void Update()
-    {
-        scoreText.text = "SCORE: " + score;
+    {        
+        if (scoreText == null)
+            return;
+        else
+            scoreText.text = "SCORE: " + score;
+
         if (player.dead == true)
         {
             if (scoreText == null)

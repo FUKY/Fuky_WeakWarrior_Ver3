@@ -33,7 +33,5 @@ public class ButtonSkillController : MonoBehaviour {
             coolDown.fillAmount = 0f;
             player.skillIsOn = false;
         }
-        Debug.Log(canSkill);
-        Debug.Log(coolDown.fillAmount);
     }
 }
