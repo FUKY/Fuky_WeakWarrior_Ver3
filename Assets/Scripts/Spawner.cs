@@ -13,6 +13,7 @@ public class Spawner : MonoBehaviour
     //public int index;
     public GameObject enemy1;
     public GameObject enemy2;
+    public GameObject enemy4;
 
     void Start()
     {
@@ -40,6 +41,10 @@ public class Spawner : MonoBehaviour
 
         GameObject enemyObj2 = Instantiate(enemy2, posSpawnLeft, transform.rotation) as GameObject;
         enemyObj2.GetComponent<Enemy2>().SetVellocity(true);
+
+        GameObject enemyObj4 = Instantiate(enemy4, posSpawnLeft, transform.rotation) as GameObject;
+        enemyObj4.GetComponent<Enemy4>().SetVellocity(true);
+
     }
 
     void SpawnRight()
@@ -51,5 +56,8 @@ public class Spawner : MonoBehaviour
 
         //GameObject enemyObj2 = Instantiate(enemy2, posSpawnRight, transform.rotation) as GameObject;
         //enemyObj2.GetComponent<Enemy2>().SetVellocity(false);
+
+        GameObject enemyObj4 = Instantiate(enemy4, posSpawnRight, transform.rotation) as GameObject;
+        enemyObj4.GetComponent<Enemy4>().SetVellocity(false);
     }
 }

@@ -22,7 +22,6 @@ public class Enemy4 : MonoBehaviour
     {
         animatorEnemy = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
-        rb2d.AddForce(new Vector2(100f, 50f));
         //frontCheck = transform.Find("frontCheck").transform;
 
         score = GameObject.Find("GameController").GetComponent<GameController>();
@@ -92,12 +91,12 @@ public class Enemy4 : MonoBehaviour
         if (left)
         {
             transform.localScale = new Vector2(1, 1);
-            rb2d.velocity = new Vector2(speed, 0f);
+            rb2d.AddForce(new Vector2(150f, 70f));
         }
         else
         {
             transform.localScale = new Vector2(-1, 1);
-            rb2d.velocity = new Vector2(-speed, 0f);
+            rb2d.AddForce(new Vector2(-150f, 70f));
         }
     }
     public void AttackOff()

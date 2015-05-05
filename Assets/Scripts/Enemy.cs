@@ -22,7 +22,6 @@ public class Enemy : MonoBehaviour {
 
         //rb2d.velocity = new Vector2(speed, 0f);
         score = GameObject.Find("GameController").GetComponent<GameController>();
-
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
@@ -46,7 +45,6 @@ public class Enemy : MonoBehaviour {
 
     void Update()
     {
-        Debug.Log(player.miss);
         //Enemy1 bị chém trúng
         if (HPEnemy <= 0)
         {
