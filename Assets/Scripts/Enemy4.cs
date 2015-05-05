@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour {
+public class Enemy4 : MonoBehaviour
+{
     public float speed;
     private Rigidbody2D rb2d;
     private Animator animatorEnemy;
@@ -14,13 +15,16 @@ public class Enemy : MonoBehaviour {
 
     private GameController score;
     private PlayerController player;
+
+
+
     void Start()
     {
         animatorEnemy = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
+        rb2d.AddForce(new Vector2(100f, 50f));
         //frontCheck = transform.Find("frontCheck").transform;
 
-        //rb2d.velocity = new Vector2(speed, 0f);
         score = GameObject.Find("GameController").GetComponent<GameController>();
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
@@ -44,15 +48,16 @@ public class Enemy : MonoBehaviour {
     //    }
     //}
 
+
     void Update()
     {
-        Debug.Log(player.miss);
         //Enemy1 bị chém trúng
         if (HPEnemy <= 0)
         {
             Destroy(gameObject);
-            score.score ++;
+            score.score++;
         }
+        //Debug.Log(player.miss);
     }
 
     void HurtEnemy()
@@ -65,13 +70,16 @@ public class Enemy : MonoBehaviour {
         if (col.tag == "Player")
         {
             animatorEnemy.SetTrigger("attackEnemy");
-            rb2d.velocity = new Vector2(0f, 0f);
+            rb2d.velocity = Vector2.zero;
+            rb2d.gravityScale = 0f;
         }
         if (col.tag == "DeathArea")
         {
             HurtEnemy();
             player.miss = true;
         }
+        else
+            player.miss = false;
         if (col.tag == "DeathAreaSkill")
         {
             HPEnemy = 0;

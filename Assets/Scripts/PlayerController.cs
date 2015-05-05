@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+        //Debug.Log(miss);
         //Bay qua phải
         if (facingRight == true) 
         {
@@ -172,7 +173,7 @@ public class PlayerController : MonoBehaviour
 
     public void ActtackMiss()
     {
-        if (miss == true)
+        if (miss == false)
         {
             animatorPlayer.speed = 0;
             deathArea.SetActive(false);
@@ -182,7 +183,6 @@ public class PlayerController : MonoBehaviour
 
     public void AttackNotMiss()
     {
-        miss = false;
     }
 
     void OnTriggerEnter2D(Collider2D col)
