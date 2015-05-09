@@ -1,55 +1,76 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour {
+public class Enemy3 : MonoBehaviour {
     public float speed;
     private Rigidbody2D rb2d;
     private Animator animatorEnemy;
     public int HPEnemy;
-
-
-    //private Transform frontCheck;
-
+    
     public GameObject attackArea;
 
     private GameController score;
     private PlayerController player;
+
+    private float timeAwakeEnemy;
+
+    private bool colliderPlayer;
+    private bool facingRight;
+
     void Start()
     {
         animatorEnemy = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
-        //frontCheck = transform.Find("frontCheck").transform;
-
-        //rb2d.velocity = new Vector2(speed, 0f);
         score = GameObject.Find("GameController").GetComponent<GameController>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        //rb2d.velocity = new Vector2(speed, 0f);
     }
-
-    //void FixedUpdate()
-    //{
-    //    Collider2D[] frontHits = Physics2D.OverlapPointAll(frontCheck.position);
-    //    foreach (Collider2D col in frontHits)
-    //    {
-    //        //Enemy1 chạm và đánh Player
-    //        if (col.tag == "Player")
-    //        {
-    //            animatorEnemy.SetTrigger(attackEnemyState);
-    //            rb2d.velocity = new UnityEngine.Vector2(0f, 0f);
-    //        }
-    //    }
-    //    if (HP <= 0)
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
 
     void Update()
     {
-        //Enemy1 bị chém trúng
         if (HPEnemy <= 0)
         {
             Destroy(gameObject);
             score.score ++;
+        }
+
+        if (facingRight==true)
+        {
+            if (transform.position.x >= -1.5f)
+            {
+                animatorEnemy.speed = 0f;
+                rb2d.velocity = Vector2.zero;
+                if (timeAwakeEnemy >= 0.5f)
+                {
+                    animatorEnemy.speed = 1f;
+                    rb2d.velocity = new Vector2(2f, 0f);
+                    if (colliderPlayer == true)
+                    {
+                        rb2d.velocity = Vector2.zero;
+                    }
+                }
+                else
+                    timeAwakeEnemy += Time.deltaTime;
+            }
+        } 
+        else
+        {
+            if (transform.position.x <= 1.5f)
+            {
+                animatorEnemy.speed = 0f;
+                rb2d.velocity = Vector2.zero;
+                if (timeAwakeEnemy >= 0.5f)
+                {
+                    animatorEnemy.speed = 1f;
+                    rb2d.velocity = new Vector2(-2f, 0f);
+                    if (colliderPlayer == true)
+                    {
+                        rb2d.velocity = Vector2.zero;
+                    }
+                }
+                else
+                    timeAwakeEnemy += Time.deltaTime;
+            }
         }
     }
 
@@ -63,7 +84,8 @@ public class Enemy : MonoBehaviour {
         if (col.tag == "Player")
         {
             animatorEnemy.SetTrigger("attackEnemy");
-            rb2d.velocity = Vector2.zero;
+            //rb2d.velocity = Vector2.zero;
+            colliderPlayer = true;
         }
         if (col.tag == "DeathArea")
         {
@@ -83,11 +105,13 @@ public class Enemy : MonoBehaviour {
         {
             transform.localScale = new Vector2(1, 1);
             rb2d.velocity = new Vector2(speed, 0f);
+            facingRight = true;
         }
         else
         {
             transform.localScale = new Vector2(-1, 1);
             rb2d.velocity = new Vector2(-speed, 0f);
+            facingRight = false;
         }
     }
     public void AttackOff()

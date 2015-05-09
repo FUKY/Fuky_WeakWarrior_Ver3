@@ -32,6 +32,12 @@ public class GameController : MonoBehaviour {
                 Destroy(scoreText);
             }
         }
+
+    }
+
+    public void RestartGame()
+    {
+        Application.LoadLevel("WW");
     }
 
 }

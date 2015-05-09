@@ -10,6 +10,8 @@ public class Enemy2 : MonoBehaviour {
     public GameObject attackArea;
 
     private GameController score;
+
+    private bool facingRight;
     
     void Start()
     {
@@ -38,13 +40,20 @@ public class Enemy2 : MonoBehaviour {
         if (col.tag == "Player")
         {
             animatorEnemy.SetTrigger("attackEnemy");
-            rb2d.velocity = new Vector2(0f, 0f);
+            rb2d.velocity = Vector2.zero;
         }
         if (col.tag == "DeathArea")
         {
             HurtEnemy();
             animatorEnemy.SetTrigger("downEnemy");
-            rb2d.velocity = new Vector2(-2f, 0f);
+            if (facingRight==true)
+            {
+                rb2d.velocity = new Vector2(-speed, 0f);
+            } 
+            else
+            {
+                rb2d.velocity = new Vector2(speed, 0f);
+            }
         }
         if (col.tag == "DeathAreaSkill")
         {
@@ -59,11 +68,13 @@ public class Enemy2 : MonoBehaviour {
         {
             transform.localScale = new Vector2(1, 1);
             rb2d.velocity = new Vector2(speed, 0f);
+            facingRight = true;
         }
         else
         {
             transform.localScale = new Vector2(-1, 1);
             rb2d.velocity = new Vector2(-speed, 0f);
+            facingRight = false;
         }
     }
 
@@ -80,6 +91,13 @@ public class Enemy2 : MonoBehaviour {
     {
         animatorEnemy.SetTrigger("idleEnemy");
         attackArea.SetActive(false);
-        rb2d.velocity = new Vector2(1f, 0f);
+        if (facingRight==true)
+        {
+            rb2d.velocity = new Vector2(1f, 0f);
+        } 
+        else
+        {
+            rb2d.velocity = new Vector2(-1f, 0f);
+        }
     }
 }

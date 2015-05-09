@@ -8,9 +8,6 @@ public class Enemy4 : MonoBehaviour
     private Animator animatorEnemy;
     public int HPEnemy;
 
-
-    //private Transform frontCheck;
-
     public GameObject attackArea;
 
     private GameController score;
@@ -22,31 +19,11 @@ public class Enemy4 : MonoBehaviour
     {
         animatorEnemy = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
-        //frontCheck = transform.Find("frontCheck").transform;
 
         score = GameObject.Find("GameController").GetComponent<GameController>();
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
-
-    //void FixedUpdate()
-    //{
-    //    Collider2D[] frontHits = Physics2D.OverlapPointAll(frontCheck.position);
-    //    foreach (Collider2D col in frontHits)
-    //    {
-    //        //Enemy1 chạm và đánh Player
-    //        if (col.tag == "Player")
-    //        {
-    //            animatorEnemy.SetTrigger(attackEnemyState);
-    //            rb2d.velocity = new UnityEngine.Vector2(0f, 0f);
-    //        }
-    //    }
-    //    if (HP <= 0)
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
-
 
     void Update()
     {
@@ -96,7 +73,7 @@ public class Enemy4 : MonoBehaviour
         else
         {
             transform.localScale = new Vector2(-1, 1);
-            rb2d.AddForce(new Vector2(-150f, 70f));
+            rb2d.AddForce(new Vector2(-150f, 70f));            
         }
     }
     public void AttackOff()

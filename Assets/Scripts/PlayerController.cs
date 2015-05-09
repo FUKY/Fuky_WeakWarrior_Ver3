@@ -89,7 +89,8 @@ public class PlayerController : MonoBehaviour
             if (timeAwake >= 0.5f)
             {
                 animatorPlayer.speed = 1f;
-                timeAwake = 0f;
+                timeAwake = 0f;               
+
             }
             else
                 timeAwake += Time.deltaTime;
@@ -181,13 +182,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void AttackNotMiss()
-    {
-    }
-
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "AttackArea")
+        if (col.tag == "AttackArea" || col.tag == "Boss")
         {
             if (state <= 0)
             {
