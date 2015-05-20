@@ -12,6 +12,8 @@ public class BossController : MonoBehaviour {
 
     public float HPEnemy;
 
+    int rand;
+
 	void Start () 
     {
         bossHead = GameObject.Find("BossHead").GetComponent<Rigidbody2D>();
@@ -23,13 +25,14 @@ public class BossController : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         score = GameObject.Find("GameController").GetComponent<GameController>();
 
-        InvokeRepeating("Attack", 1f, 1f);
 
+        //InvokeRepeating("Attack", 1f, 1f);      
+        
 	}
 	
 	void Update ()
     {
-
+        rand = Random.Range(1, 3);
         if (HPEnemy <= 0)
         {
             Destroy(gameObject);
@@ -44,11 +47,11 @@ public class BossController : MonoBehaviour {
 
     void Attack()
     {
-        int rand = Random.Range(1, 3);
         if (rand == 1)
-            AttackLeftHand();
-        else
             AttackRightHand();
+        if (rand == 2)
+            AttackLeftHand();
+        Debug.Log(rand);
     }
 
     void AttackLeftHand()

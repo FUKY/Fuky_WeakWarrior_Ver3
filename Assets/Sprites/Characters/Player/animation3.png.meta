@@ -1,19 +1,17 @@
 fileFormatVersion: 2
-guid: e1d43c9c22698e04a9b2a9e37dc173e0
-timeCreated: 1432104804
+guid: 1522abdee06fc8240bbfc7e543d7964b
+timeCreated: 1431332344
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: M_ogre_01(180x94)_0
-    21300002: M_ogre_01(180x94)_1
-    21300004: M_ogre_01(180x94)_2
-    21300006: M_ogre_01(180x94)_3
-    21300008: M_ogre_01(180x94)_4
-    21300010: M_ogre_01(180x94)_5
-    21300012: M_ogre_01(180x94)_6
-    21300014: M_ogre_01(180x94)_7
-    21300016: M_ogre_01(180x94)_8
-    21300018: M_ogre_01(180x94)_9
+    21300000: animation3_0
+    21300002: animation3_1
+    21300004: animation3_2
+    21300006: animation3_3
+    21300008: animation3_4
+    21300010: animation3_5
+    21300012: animation3_7
+    21300014: animation3_6
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -59,105 +57,85 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: M_ogre_01(180x94)_0
+    - name: animation3_0
       rect:
         serializedVersion: 2
-        x: 22
-        y: 384
-        width: 112
-        height: 82
+        x: 15
+        y: 1
+        width: 130
+        height: 143
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: M_ogre_01(180x94)_1
+    - name: animation3_1
       rect:
         serializedVersion: 2
-        x: 203
-        y: 384
-        width: 110
-        height: 83
+        x: 161
+        y: 0
+        width: 130
+        height: 143
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: M_ogre_01(180x94)_2
+    - name: animation3_2
       rect:
         serializedVersion: 2
-        x: 23
-        y: 290
-        width: 108
-        height: 82
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: M_ogre_01(180x94)_3
-      rect:
-        serializedVersion: 2
-        x: 203
-        y: 291
-        width: 110
-        height: 82
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: M_ogre_01(180x94)_4
-      rect:
-        serializedVersion: 2
-        x: 61
-        y: 211
-        width: 68
-        height: 56
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: M_ogre_01(180x94)_5
-      rect:
-        serializedVersion: 2
-        x: 219
-        y: 199
-        width: 84
-        height: 82
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: M_ogre_01(180x94)_6
-      rect:
-        serializedVersion: 2
-        x: 5
-        y: 101
+        x: 313
+        y: 1
         width: 125
-        height: 82
-      alignment: 9
-      pivot: {x: .448000014, y: .5}
+        height: 141
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: M_ogre_01(180x94)_7
+    - name: animation3_3
       rect:
         serializedVersion: 2
-        x: 220
-        y: 102
-        width: 138
-        height: 82
+        x: 473
+        y: 0
+        width: 146
+        height: 162
       alignment: 9
-      pivot: {x: .405800015, y: .5}
+      pivot: {x: .444999993, y: .441350013}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: M_ogre_01(180x94)_8
+    - name: animation3_4
       rect:
         serializedVersion: 2
-        x: 40
-        y: 8
-        width: 138
-        height: 80
+        x: 630
+        y: 0
+        width: 147
+        height: 164
       alignment: 9
-      pivot: {x: .405800015, y: .512499988}
+      pivot: {x: .442000002, y: .43599999}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: M_ogre_01(180x94)_9
+    - name: animation3_5
       rect:
         serializedVersion: 2
-        x: 204
-        y: 8
-        width: 108
-        height: 82
+        x: 792
+        y: 0
+        width: 193
+        height: 164
       alignment: 9
-      pivot: {x: .518518507, y: .5}
+      pivot: {x: .336780012, y: .43599999}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: animation3_7
+      rect:
+        serializedVersion: 2
+        x: 1164
+        y: 1
+        width: 130
+        height: 142
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: animation3_6
+      rect:
+        serializedVersion: 2
+        x: 1007
+        y: 0
+        width: 156
+        height: 145
+      alignment: 9
+      pivot: {x: .416700006, y: .493000001}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
