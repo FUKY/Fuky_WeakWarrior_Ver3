@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour {
     private Text gameOver;
     private Text scoreText;
 
+
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();

@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy5 : MonoBehaviour {
-
+public class Enemy6 : MonoBehaviour {
     public float speed;
     private Rigidbody2D rb2d;
     private Animator animatorEnemy;
     public int HPEnemy;
-
 
     public GameObject attackArea;
 
@@ -17,13 +15,13 @@ public class Enemy5 : MonoBehaviour {
     {
         animatorEnemy = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
-        //score = GameObject.Find("GameController").GetComponent<GameController>();
+        score = GameObject.Find("GameController").GetComponent<GameController>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-
-        rb2d.velocity = new Vector2(1f, 0f);
     }
+
     void Update()
     {
+        //Enemy1 bị chém trúng
         if (HPEnemy <= 0)
         {
             Destroy(gameObject);
@@ -46,7 +44,6 @@ public class Enemy5 : MonoBehaviour {
         if (col.tag == "DeathArea")
         {
             HurtEnemy();
-            AttackOff();
             player.miss = true;
         }
         if (col.tag == "DeathAreaSkill")
