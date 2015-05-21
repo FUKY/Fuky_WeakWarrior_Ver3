@@ -1,9 +1,19 @@
 fileFormatVersion: 2
 guid: 7326ddae6915d7b4c8b2f8ba67c885ed
-timeCreated: 1429687925
+timeCreated: 1432227878
 licenseType: Pro
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: M_mummy(128x94)_0
+    21300002: M_mummy(128x94)_1
+    21300004: M_mummy(128x94)_2
+    21300006: M_mummy(128x94)_3
+    21300008: M_mummy(128x94)_4
+    21300010: M_mummy(128x94)_5
+    21300012: M_mummy(128x94)_6
+    21300014: M_mummy(128x94)_7
+    21300016: M_mummy(128x94)_8
+    21300018: M_mummy(128x94)_9
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,14 +40,14 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -48,7 +58,107 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: M_mummy(128x94)_0
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 389
+        width: 63
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_mummy(128x94)_1
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 388
+        width: 60
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_mummy(128x94)_2
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 294
+        width: 63
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_mummy(128x94)_3
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 295
+        width: 60
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_mummy(128x94)_4
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 222
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_mummy(128x94)_5
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 211
+        width: 63
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_mummy(128x94)_6
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 106
+        width: 55
+        height: 82
+      alignment: 9
+      pivot: {x: .572730005, y: .408499986}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_mummy(128x94)_7
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 106
+        width: 82
+        height: 67
+      alignment: 9
+      pivot: {x: .384000003, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_mummy(128x94)_8
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 12
+        width: 63
+        height: 61
+      alignment: 9
+      pivot: {x: .5, y: .549099982}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_mummy(128x94)_9
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 12
+        width: 55
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 
