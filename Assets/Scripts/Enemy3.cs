@@ -90,7 +90,7 @@ public class Enemy3 : MonoBehaviour {
         if (col.tag == "DeathArea")
         {
             HurtEnemy();
-            player.miss = true;
+            player.notMiss = true;
         }
         if (col.tag == "DeathAreaSkill")
         {

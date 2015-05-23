@@ -4,7 +4,12 @@ using System.Collections;
 public class BossRightHandController : MonoBehaviour {
 
     public bool colPlayerRight;
-    public Rigidbody2D rb2dRight;
+    public bool isAttackedRight;
+    private Rigidbody2D rb2dRight;
+
+
+    public BossController bossController;
+    public PlayerController playerController;
 
     void Start()
     {
@@ -13,7 +18,12 @@ public class BossRightHandController : MonoBehaviour {
 
     public void AttackRight()
     {
-        rb2dRight.velocity = new Vector2(-2f, 0f);
+        rb2dRight.velocity = new Vector2(-1f, 0f);
+    }
+
+    public void AttackRightFake()
+    {
+
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -22,14 +32,23 @@ public class BossRightHandController : MonoBehaviour {
         {
             rb2dRight.velocity = new Vector2(1f, 0f);
             colPlayerRight = true;
+            playerController.state--;
+        }
+        if (col.tag == "DeathArea")
+        {
+            isAttackedRight = true;
+            rb2dRight.velocity = new Vector2(1f, 0f);
+            bossController.HurtEnemy();
+            playerController.notMiss = true;
         }
     }
     void Update()
     {
-        if (colPlayerRight == true && transform.position.x >= 3f)
+        if (colPlayerRight == true || isAttackedRight == true && transform.position.x >= 3f) 
         {
             rb2dRight.velocity = Vector2.zero;
             colPlayerRight = false;
+            isAttackedRight = false;
         }
     }
 }

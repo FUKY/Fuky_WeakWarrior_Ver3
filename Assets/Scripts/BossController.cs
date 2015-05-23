@@ -58,9 +58,9 @@ public class BossController : MonoBehaviour {
 
         Debug.Log(rand);
     }
+    
 
-
-    void HurtEnemy()
+    public void HurtEnemy()
     {
         HPEnemy--;
     }

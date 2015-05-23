@@ -52,10 +52,10 @@ public class Enemy4 : MonoBehaviour
         if (col.tag == "DeathArea")
         {
             HurtEnemy();
-            player.miss = true;
+            player.notMiss = true;
         }
         else
-            player.miss = false;
+            player.notMiss = false;
         if (col.tag == "DeathAreaSkill")
         {
             HPEnemy = 0;

@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     private ButtonSkillController buttonSkill;
 
-    public bool miss;
+    public bool notMiss;
 
     private float timeAwake;
     private bool missing;
@@ -174,7 +174,7 @@ public class PlayerController : MonoBehaviour
 
     public void ActtackMiss()
     {
-        if (miss == false)
+        if (notMiss == false)
         {
             animatorPlayer.speed = 0;
             deathArea.SetActive(false);
@@ -184,7 +184,7 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "AttackArea" || col.tag == "Boss")
+        if (col.tag == "AttackArea")
         {
             if (state <= 0)
             {
