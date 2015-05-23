@@ -17,6 +17,7 @@ public class Enemy6 : MonoBehaviour {
         rb2d = GetComponent<Rigidbody2D>();
         score = GameObject.Find("GameController").GetComponent<GameController>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        rb2d.velocity = new Vector2(1f, 0f);
     }
 
     void Update()
