@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-
-    private Animator animatorPlayer;
+    public Animator animatorPlayer;
     public RuntimeAnimatorController[] listAnimator;
     public int state;
     static int attackPlayerState;
@@ -40,12 +39,11 @@ public class PlayerController : MonoBehaviour
         deathAreaSkill.SetActive(false);
         rb2dPlayer = GetComponent<Rigidbody2D>();
 
-        buttonSkill=GameObject.Find("ButtonSkill").GetComponent<ButtonSkillController>();
+        buttonSkill = GameObject.Find("ButtonSkill").GetComponent<ButtonSkillController>();
         
     }
     void Update()
     {
-        //Debug.Log(miss);
         //Bay qua phải
         if (facingRight == true) 
         {

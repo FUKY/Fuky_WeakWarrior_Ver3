@@ -5,42 +5,29 @@ public class BossLeftHandController : MonoBehaviour {
     public bool colPlayerLeft;
     public bool isAttackedLeft;
     private Rigidbody2D rb2dLeft;
-    private Animator animatorLeft;
 
     public BossController bossController;
-
     public PlayerController playerController;
 
     void Start()
     {
-        rb2dLeft = GetComponent<Rigidbody2D>();
-        animatorLeft = GetComponent<Animator>();
-
-       
+        rb2dLeft = GetComponent<Rigidbody2D>();       
     }
-
-    public void OffShake()
-    {
-        animatorLeft.SetBool("shakeBoss", false);
-    }
-
+    
     public void AttackLeft()
     {
         rb2dLeft.velocity = new Vector2(1f, 0f);
     }
 
-    public void OnShake()
-    {
-        animatorLeft.SetBool("shakeBoss", true);
-    }
 
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.tag == "Player")
         {
-            rb2dLeft.velocity = new Vector2(-1f, 0f);
             colPlayerLeft = true;
+            rb2dLeft.velocity = new Vector2(-1f, 0f);
             playerController.state--;
+            playerController.animatorPlayer.runtimeAnimatorController = playerController.listAnimator[playerController.state];
         }
         if (col.tag == "DeathArea")
         {
@@ -52,7 +39,7 @@ public class BossLeftHandController : MonoBehaviour {
     }
     void Update()
     {
-        if (colPlayerLeft == true || isAttackedLeft == true && transform.position.x <= -3f) 
+        if ((colPlayerLeft == true && transform.position.x <= -3f) || (isAttackedLeft == true && transform.position.x <= -3f)) 
         {
             rb2dLeft.velocity = Vector2.zero;
             colPlayerLeft = false;

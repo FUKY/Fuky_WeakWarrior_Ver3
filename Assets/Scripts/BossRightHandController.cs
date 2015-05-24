@@ -21,11 +21,6 @@ public class BossRightHandController : MonoBehaviour {
         rb2dRight.velocity = new Vector2(-1f, 0f);
     }
 
-    public void AttackRightFake()
-    {
-
-    }
-
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.tag == "Player")
@@ -33,6 +28,7 @@ public class BossRightHandController : MonoBehaviour {
             rb2dRight.velocity = new Vector2(1f, 0f);
             colPlayerRight = true;
             playerController.state--;
+            playerController.animatorPlayer.runtimeAnimatorController = playerController.listAnimator[playerController.state];
         }
         if (col.tag == "DeathArea")
         {
@@ -44,7 +40,7 @@ public class BossRightHandController : MonoBehaviour {
     }
     void Update()
     {
-        if (colPlayerRight == true || isAttackedRight == true && transform.position.x >= 3f) 
+        if ((colPlayerRight == true && transform.position.x >= 3f) || (isAttackedRight == true && transform.position.x >= 3f)) 
         {
             rb2dRight.velocity = Vector2.zero;
             colPlayerRight = false;
