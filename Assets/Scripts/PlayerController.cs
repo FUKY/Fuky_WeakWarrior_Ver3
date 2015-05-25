@@ -79,8 +79,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
-
         //Chém miss thì Player bị dừng
         if (missing == true)
         {
@@ -184,17 +182,21 @@ public class PlayerController : MonoBehaviour
     {
         if (col.tag == "AttackArea")
         {
-            if (state <= 0)
-            {
-                Destroy(gameObject);
-                dead = true;
-            }
-            else
-            {
-                state--;
-                animatorPlayer.runtimeAnimatorController = listAnimator[state];
+            state--;
+            UpdateState(state);
+        }
+    }
 
-            }
+    public void UpdateState(int statePlayer)
+    {
+        if (statePlayer < 0)
+        {
+            gameObject.SetActive(false);
+            dead = true;
+        } 
+        else
+        {
+            animatorPlayer.runtimeAnimatorController = listAnimator[statePlayer];
         }
     }
    

@@ -1,27 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy5 : MonoBehaviour {
+public class EnemyController : MonoBehaviour {
 
-    public float speed;
-    private Rigidbody2D rb2d;
-    private Animator animatorEnemy;
+    public float speed; 
     public int HPEnemy;
-
+    private Animator animatorEnemy;
 
     public GameObject attackArea;
 
     private GameController score;
-    private PlayerController player;
+    public PlayerController playerController;
+
+    private Rigidbody2D rb2dEnemy;
+    public Rigidbody2D GetRb2dEnemy
+    {
+        get { return rb2dEnemy; }
+        set { rb2dEnemy = value; }
+    }
+   
+    bool facingRight;
+    public bool FacingRight
+    {
+        get { return facingRight; }
+        set { facingRight = value; }
+    }
     void Start()
     {
         animatorEnemy = GetComponent<Animator>();
-        rb2d = GetComponent<Rigidbody2D>();
+        rb2dEnemy = GetComponent<Rigidbody2D>();
         score = GameObject.Find("GameController").GetComponent<GameController>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-
-        rb2d.velocity = new Vector2(1f, 0f);
+       
     }
+    
+
     void Update()
     {
         if (HPEnemy <= 0)
@@ -30,43 +42,50 @@ public class Enemy5 : MonoBehaviour {
             score.score++;
         }
     }
-
-    void HurtEnemy()
+    public void HurtEnemy()
     {
         HPEnemy--;
     }
-
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.tag == "Player")
         {
             animatorEnemy.SetTrigger("attackEnemy");
-            rb2d.velocity = Vector2.zero;
+            rb2dEnemy.velocity = Vector2.zero;
         }
         if (col.tag == "DeathArea")
         {
             HurtEnemy();
-            AttackOff();
-            player.notMiss = true;
+            animatorEnemy.SetTrigger("downEnemy");
+            playerController.notMiss = true;
+            if (facingRight == true)
+            {
+                rb2dEnemy.velocity = new Vector2(-speed / 2, 0f);
+            }
+            else
+            {
+                rb2dEnemy.velocity = new Vector2(speed / 2, 0f);
+            }
         }
         if (col.tag == "DeathAreaSkill")
         {
             HPEnemy = 0;
         }
     }
-
     public void SetVellocity(bool left)
     {
-        rb2d = GetComponent<Rigidbody2D>();
+        rb2dEnemy = GetComponent<Rigidbody2D>();
         if (left)
         {
             transform.localScale = new Vector2(1, 1);
-            rb2d.velocity = new Vector2(speed, 0f);
+            rb2dEnemy.velocity = new Vector2(speed, 0f);
+            facingRight = true;
         }
         else
         {
             transform.localScale = new Vector2(-1, 1);
-            rb2d.velocity = new Vector2(-speed, 0f);
+            rb2dEnemy.velocity = new Vector2(-speed, 0f);
+            facingRight = false;
         }
     }
     public void AttackOff()

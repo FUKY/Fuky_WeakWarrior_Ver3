@@ -6,6 +6,8 @@ public class BossLeftHandController : MonoBehaviour {
     public bool isAttackedLeft;
     private Rigidbody2D rb2dLeft;
 
+    public float speedAttack;
+
     public BossController bossController;
     public PlayerController playerController;
 
@@ -16,7 +18,7 @@ public class BossLeftHandController : MonoBehaviour {
     
     public void AttackLeft()
     {
-        rb2dLeft.velocity = new Vector2(1f, 0f);
+        rb2dLeft.velocity = new Vector2(speedAttack, 0f);
     }
 
 
@@ -27,9 +29,9 @@ public class BossLeftHandController : MonoBehaviour {
             colPlayerLeft = true;
             rb2dLeft.velocity = new Vector2(-1f, 0f);
             playerController.state--;
-            playerController.animatorPlayer.runtimeAnimatorController = playerController.listAnimator[playerController.state];
+            playerController.UpdateState(playerController.state);
         }
-        if (col.tag == "DeathArea")
+        if (col.tag == "DeathArea" || col.tag == "DeathAreaSkill") 
         {
             isAttackedLeft = true;
             rb2dLeft.velocity = new Vector2(-1f, 0f);
@@ -47,4 +49,5 @@ public class BossLeftHandController : MonoBehaviour {
         }
 
     }
+
 }

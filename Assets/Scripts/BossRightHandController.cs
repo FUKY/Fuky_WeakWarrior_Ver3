@@ -6,7 +6,7 @@ public class BossRightHandController : MonoBehaviour {
     public bool colPlayerRight;
     public bool isAttackedRight;
     private Rigidbody2D rb2dRight;
-
+    public float speedAttack;
 
     public BossController bossController;
     public PlayerController playerController;
@@ -18,7 +18,7 @@ public class BossRightHandController : MonoBehaviour {
 
     public void AttackRight()
     {
-        rb2dRight.velocity = new Vector2(-1f, 0f);
+        rb2dRight.velocity = new Vector2(-speedAttack, 0f);
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -28,9 +28,9 @@ public class BossRightHandController : MonoBehaviour {
             rb2dRight.velocity = new Vector2(1f, 0f);
             colPlayerRight = true;
             playerController.state--;
-            playerController.animatorPlayer.runtimeAnimatorController = playerController.listAnimator[playerController.state];
+            playerController.UpdateState(playerController.state);
         }
-        if (col.tag == "DeathArea")
+        if (col.tag == "DeathArea" || col.tag == "DeathAreaSkill") 
         {
             isAttackedRight = true;
             rb2dRight.velocity = new Vector2(1f, 0f);
@@ -40,7 +40,8 @@ public class BossRightHandController : MonoBehaviour {
     }
     void Update()
     {
-        if ((colPlayerRight == true && transform.position.x >= 3f) || (isAttackedRight == true && transform.position.x >= 3f)) 
+        if ((colPlayerRight == true && transform.position.x >= 3f)
+            || (isAttackedRight == true && transform.position.x >= 3f)) 
         {
             rb2dRight.velocity = Vector2.zero;
             colPlayerRight = false;

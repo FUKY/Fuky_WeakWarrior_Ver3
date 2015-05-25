@@ -3,12 +3,9 @@ using System.Collections;
 
 public class BossController : MonoBehaviour {
 
-    public BossLeftHandController bossLeftHandController;
-    public BossRightHandController bossRightHandController;
-    private Rigidbody2D bossHead;
+    private BossHandController bossHandController;
+    public Rigidbody2D bossHead; 
 
-
-    private PlayerController player;
     private GameController score;
 
     public float HPEnemy;
@@ -17,14 +14,11 @@ public class BossController : MonoBehaviour {
 
 	void Start () 
     {
-        bossHead = GameObject.Find("BossHead").GetComponent<Rigidbody2D>();
-        bossHead.velocity = new Vector2(0f, 1f);
+        bossHead.velocity = new Vector2(0f, 1f);        
         
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         score = GameObject.Find("GameController").GetComponent<GameController>();
-
+        bossHandController = gameObject.GetComponentInChildren<BossHandController>();
 	}
-	
 	void Update ()
     {
         if (HPEnemy <= 0)
@@ -52,9 +46,9 @@ public class BossController : MonoBehaviour {
     {
         int rand = Random.Range(1, 3);
         if (rand == 1)
-            bossLeftHandController.AttackLeft();
+            bossHandController.AttackHand(true);
         if (rand == 2)
-            bossRightHandController.AttackRight();
+            bossHandController.AttackHand(false);
 
         Debug.Log(rand);
     }
