@@ -39,14 +39,14 @@ public class Spawner : MonoBehaviour
     void SpawnLeft()
     {
         GameObject enemyObj1 = Instantiate(enemy1, posSpawnLeft, transform.rotation) as GameObject;
-        enemyObj1.GetComponent<EnemyController>().SetVellocity(true);
+        enemyObj1.GetComponent<Enemy3>().SetVellocity(true);
         
     }
 
     void SpawnRight()
     {
         GameObject enemyObj1 = Instantiate(enemy1, posSpawnRight, transform.rotation) as GameObject;
-        enemyObj1.GetComponent<EnemyController>().SetVellocity(false);
+        enemyObj1.GetComponent<Enemy3>().SetVellocity(false);
 
     }
 }

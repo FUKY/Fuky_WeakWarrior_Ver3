@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy2 : EnemyController {
+public class Enemy2 : EnemyController
+{   
     public void IdleOn()
     {
         attackArea.SetActive(false);
@@ -15,4 +16,20 @@ public class Enemy2 : EnemyController {
         }
     }
 
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        CheckCollision(col);
+        if (col.tag=="DeathArea")
+        {
+            GetAnimatorEnemy.SetTrigger("downEnemy");
+            if (FacingRight == true)
+            {
+                GetRb2dEnemy.velocity = new Vector2(-speed, 0f);
+            }
+            else
+            {
+                GetRb2dEnemy.velocity = new Vector2(speed, 0f);
+            }
+        }
+    }
 }

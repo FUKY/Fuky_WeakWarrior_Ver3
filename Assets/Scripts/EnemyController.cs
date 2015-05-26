@@ -7,10 +7,22 @@ public class EnemyController : MonoBehaviour {
     public int HPEnemy;
     private Animator animatorEnemy;
 
+    public Animator GetAnimatorEnemy
+    {
+        get { return animatorEnemy; }
+        set { animatorEnemy = value; }
+    }
+
     public GameObject attackArea;
 
     private GameController score;
-    public PlayerController playerController;
+    private PlayerController playerController;
+
+    public PlayerController GetPlayerController
+    {
+        get { return playerController; }
+        set { playerController = value; }
+    }
 
     private Rigidbody2D rb2dEnemy;
     public Rigidbody2D GetRb2dEnemy
@@ -30,11 +42,10 @@ public class EnemyController : MonoBehaviour {
         animatorEnemy = GetComponent<Animator>();
         rb2dEnemy = GetComponent<Rigidbody2D>();
         score = GameObject.Find("GameController").GetComponent<GameController>();
-       
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
     
-
-    void Update()
+    public void Dead()
     {
         if (HPEnemy <= 0)
         {
@@ -42,11 +53,17 @@ public class EnemyController : MonoBehaviour {
             score.score++;
         }
     }
+
+    void Update()
+    {
+        Dead();
+    }
     public void HurtEnemy()
     {
         HPEnemy--;
     }
-    void OnTriggerEnter2D(Collider2D col)
+
+    public void CheckCollision(Collider2D col)
     {
         if (col.tag == "Player")
         {
@@ -56,16 +73,8 @@ public class EnemyController : MonoBehaviour {
         if (col.tag == "DeathArea")
         {
             HurtEnemy();
-            animatorEnemy.SetTrigger("downEnemy");
             playerController.notMiss = true;
-            if (facingRight == true)
-            {
-                rb2dEnemy.velocity = new Vector2(-speed / 2, 0f);
-            }
-            else
-            {
-                rb2dEnemy.velocity = new Vector2(speed / 2, 0f);
-            }
+
         }
         if (col.tag == "DeathAreaSkill")
         {
