@@ -6,6 +6,11 @@ public class EnemyController : MonoBehaviour {
     public float speed; 
     public int HPEnemy;
     private Animator animatorEnemy;
+    public GameObject attackArea;
+
+    private GameController score;
+    private PlayerController playerController;
+    private Rigidbody2D rb2dEnemy;
 
     public Animator GetAnimatorEnemy
     {
@@ -13,18 +18,12 @@ public class EnemyController : MonoBehaviour {
         set { animatorEnemy = value; }
     }
 
-    public GameObject attackArea;
-
-    private GameController score;
-    private PlayerController playerController;
-
     public PlayerController GetPlayerController
     {
         get { return playerController; }
         set { playerController = value; }
     }
 
-    private Rigidbody2D rb2dEnemy;
     public Rigidbody2D GetRb2dEnemy
     {
         get { return rb2dEnemy; }
@@ -42,7 +41,11 @@ public class EnemyController : MonoBehaviour {
         animatorEnemy = GetComponent<Animator>();
         rb2dEnemy = GetComponent<Rigidbody2D>();
         score = GameObject.Find("GameController").GetComponent<GameController>();
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        
+        if (playerController == null)
+            return;
+        else
+            playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
     
     public void Dead()
@@ -73,7 +76,7 @@ public class EnemyController : MonoBehaviour {
         if (col.tag == "DeathArea")
         {
             HurtEnemy();
-            playerController.notMiss = true;
+           // playerController.notMiss = true;
 
         }
         if (col.tag == "DeathAreaSkill")

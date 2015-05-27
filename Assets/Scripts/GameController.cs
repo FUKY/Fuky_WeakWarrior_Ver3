@@ -7,15 +7,17 @@ public class GameController : MonoBehaviour {
     private PlayerController player;
     private Text gameOver;
     private Text scoreText;
-
+    public GameObject boss;
+    private Spawner spawner;
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         gameOver = GameObject.Find("GameOver").GetComponent<Text>();
         scoreText = GameObject.Find("Score").GetComponent<Text>();
+        spawner = GameObject.Find("Spawner").GetComponent<Spawner>();
     }
-
+    int flag = 0;
     void Update()
     {        
         if (scoreText == null)
@@ -32,6 +34,28 @@ public class GameController : MonoBehaviour {
                 gameOver.text = "GAME OVER!\nYour Score: " + score;
                 Destroy(scoreText);
             }
+        }
+        if (score >= 2)
+        {
+            // Gọi Boss khi đủ Score
+            if (boss == null)
+            {
+                Debug.Log("boss die");
+                //spawner.StartCoroutine(spawner.Spawn());
+                flag++;
+            }
+            else
+            {
+                Debug.Log("boss alive");
+                boss.SetActive(true);
+                spawner.StopAllCoroutines();
+                //spawner.SetActive(false);
+            }
+            //spawner.GetComponent<Spawner>().CancelInvoke();   
+        }
+        if (flag == 1) 
+        {
+            spawner.StartCoroutine(spawner.Spawn());
         }
 
     }

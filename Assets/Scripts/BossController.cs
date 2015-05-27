@@ -8,9 +8,10 @@ public class BossController : MonoBehaviour {
 
     private GameController score;
 
-    public float HPEnemy;
+    public int HPEnemy;
 
     float timeWaitBossAttack;
+    public bool dead;
 
 	void Start () 
     {
@@ -21,12 +22,8 @@ public class BossController : MonoBehaviour {
 	}
 	void Update ()
     {
-        if (HPEnemy <= 0)
-        {
-            Destroy(gameObject);
-            score.score++;
-        }
-
+        //Debug.Log(HPEnemy);      
+        Dead();
         if (bossHead.transform.position.y >= 0.45f)
         {
             bossHead.velocity = Vector2.zero;
@@ -49,10 +46,18 @@ public class BossController : MonoBehaviour {
             bossHandController.AttackHand(true);
         if (rand == 2)
             bossHandController.AttackHand(false);
-
-        Debug.Log(rand);
+        //Debug.Log(rand);
     }
-    
+
+    public void Dead()
+    {
+        if (HPEnemy <= 0)
+        {
+            Destroy(gameObject);
+            score.score++;
+            dead = true;
+        }
+    }
 
     public void HurtEnemy()
     {
