@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour {
     private Text scoreText;
     public GameObject boss;
     private Spawner spawner;
+    public AudioClip[] clips;
 
     void Awake()
     {
@@ -34,8 +35,12 @@ public class GameController : MonoBehaviour {
                 gameOver.text = "GAME OVER!\nYour Score: " + score;
                 Destroy(scoreText);
             }
+
+            boss.GetComponent<BossController>().StopAllCoroutines();
+            spawner.StopAllCoroutines();
+            SoundController.instanceSound.PlaySingle(clips[0]);
         }
-        if (score >= 2)
+        if (score >= 3)
         {
             // Gọi Boss khi đủ Score
             if (boss == null)

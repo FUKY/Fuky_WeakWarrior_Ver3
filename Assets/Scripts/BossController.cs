@@ -19,6 +19,8 @@ public class BossController : MonoBehaviour {
         
         score = GameObject.Find("GameController").GetComponent<GameController>();
         bossHandController = gameObject.GetComponentInChildren<BossHandController>();
+        
+        StartCoroutine(Attack(3.0f));
 	}
 	void Update ()
     {
@@ -29,24 +31,37 @@ public class BossController : MonoBehaviour {
             bossHead.velocity = Vector2.zero;
         }
         // Attack Player
-        if (timeWaitBossAttack >= 4)
-        {
-            Attack();
-            timeWaitBossAttack = 0;
-        }
-        else
-            timeWaitBossAttack += Time.deltaTime;
+        //if (timeWaitBossAttack >= 4)
+        //{
+        //    Attack();
+        //    timeWaitBossAttack = 0;
+        //}
+        //else
+        //    timeWaitBossAttack += Time.deltaTime;
 
 	}
 
-    void Attack()
+    //void Attack()
+    //{
+    //    int rand = Random.Range(1, 3);
+    //    if (rand == 1)
+    //        bossHandController.AttackHand(true);
+    //    if (rand == 2)
+    //        bossHandController.AttackHand(false);
+    //    //Debug.Log(rand);
+    //}
+
+    public IEnumerator Attack(float timeWaitBossAttack)
     {
-        int rand = Random.Range(1, 3);
-        if (rand == 1)
-            bossHandController.AttackHand(true);
-        if (rand == 2)
-            bossHandController.AttackHand(false);
-        //Debug.Log(rand);
+        while (true)
+        {
+            yield return new WaitForSeconds(timeWaitBossAttack);
+            int rand = Random.Range(1, 3);
+            if (rand == 1)
+                bossHandController.AttackHand(true);
+            if (rand == 2)
+                bossHandController.AttackHand(false);
+        }
     }
 
     public void Dead()

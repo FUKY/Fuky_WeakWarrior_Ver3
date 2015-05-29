@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public Animator animatorPlayer;
+    private Animator animatorPlayer;
     public RuntimeAnimatorController[] listAnimator;
     public int state;
     static int attackPlayerState;
@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
 
     private float timeAwake;
     private bool missing;
+    public AudioClip[] playerSounds;
 
     void Start()
     {
@@ -38,9 +39,8 @@ public class PlayerController : MonoBehaviour
         deathArea.SetActive(false);
         deathAreaSkill.SetActive(false);
         rb2dPlayer = GetComponent<Rigidbody2D>();
-
         buttonSkill = GameObject.Find("ButtonSkill").GetComponent<ButtonSkillController>();
-        
+        //playerSounds = GetComponents<AudioClip>();
     }
     void Update()
     {
@@ -118,9 +118,7 @@ public class PlayerController : MonoBehaviour
             transform.localScale = theScale;
             facingRight = true;
         }
-    }
-
-    
+    }      
 
     public void AttackOn()
     {
@@ -184,6 +182,7 @@ public class PlayerController : MonoBehaviour
         {
             state--;
             UpdateState(state);
+            SoundController.instanceSound.PlaySingle(playerSounds[0]);
         }
     }
 
@@ -195,9 +194,7 @@ public class PlayerController : MonoBehaviour
             dead = true;
         } 
         else
-        {
             animatorPlayer.runtimeAnimatorController = listAnimator[statePlayer];
-        }
     }
    
 }

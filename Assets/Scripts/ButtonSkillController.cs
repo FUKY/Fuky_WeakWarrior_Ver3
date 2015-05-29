@@ -22,9 +22,7 @@ public class ButtonSkillController : MonoBehaviour {
         {
             coolDown.fillAmount += 1.0f / waitTime * Time.deltaTime;
             if (coolDown.fillAmount == 1f)
-            {
                 canSkill = true;
-            }
             else
                 canSkill = false;
         }
