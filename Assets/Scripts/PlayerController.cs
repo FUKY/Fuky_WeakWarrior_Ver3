@@ -36,11 +36,8 @@ public class PlayerController : MonoBehaviour
         animatorPlayer = GetComponent<Animator>();
         animatorPlayer.runtimeAnimatorController = listAnimator[state];
         attackPlayerState = Animator.StringToHash("attackPlayer");
-        deathArea.SetActive(false);
-        deathAreaSkill.SetActive(false);
         rb2dPlayer = GetComponent<Rigidbody2D>();
         buttonSkill = GameObject.Find("ButtonSkill").GetComponent<ButtonSkillController>();
-        //playerSounds = GetComponents<AudioClip>();
     }
     void Update()
     {
@@ -58,7 +55,6 @@ public class PlayerController : MonoBehaviour
                 skilling = false;
                 animatorPlayer.SetTrigger("skillPlayer");
                 animatorPlayer.speed = 1f;
-                SkillOff();
             }
         }
         else
@@ -75,7 +71,6 @@ public class PlayerController : MonoBehaviour
                 skilling = false;
                 animatorPlayer.SetTrigger("skillPlayer");
                 animatorPlayer.speed = 1f;
-                SkillOff();
             }
         }
 
@@ -95,6 +90,7 @@ public class PlayerController : MonoBehaviour
     
     public void FlipLeft()
     {
+        SoundController.instanceSound.PlaySingle(playerSounds[2]);
         if (animatorPlayer == null)
             return;
         else
@@ -108,6 +104,7 @@ public class PlayerController : MonoBehaviour
     }
     public void FlipRight()
     {
+        SoundController.instanceSound.PlaySingle(playerSounds[2]);
         if (animatorPlayer == null)
             return;
         else
@@ -119,23 +116,6 @@ public class PlayerController : MonoBehaviour
             facingRight = true;
         }
     }      
-
-    public void AttackOn()
-    {
-        deathArea.SetActive(true);
-    }
-
-    public void AttackOff()
-    {
-        deathArea.SetActive(false);
-    }
-    public void SkillOff()
-    {
-        deathAreaSkill.SetActive(false);
-        skillIsOn = false;
-    }
-
-
     public void SkillOn()
     {
         if (buttonSkill.canSkill == true)
@@ -152,14 +132,12 @@ public class PlayerController : MonoBehaviour
     {
         if (facingRight == false)
         {
-            deathAreaSkill.transform.position = new Vector2(0.6f, -0.4f);
             rb2dPlayer.velocity = new Vector2(-10f, 0f);
             animatorPlayer.speed = 0f;
             deathAreaSkill.SetActive(true);
         }
         else
         {
-            deathAreaSkill.transform.position = new Vector2(-0.6f, -0.4f);
             rb2dPlayer.velocity = new Vector2(10f, 0f);
             animatorPlayer.speed = 0f;
             deathAreaSkill.SetActive(true);
@@ -171,7 +149,6 @@ public class PlayerController : MonoBehaviour
         if (notMiss == false)
         {
             animatorPlayer.speed = 0;
-            deathArea.SetActive(false);
             missing = true;
         }
     }
@@ -183,6 +160,8 @@ public class PlayerController : MonoBehaviour
             state--;
             UpdateState(state);
             SoundController.instanceSound.PlaySingle(playerSounds[0]);
+            if (state == 0)
+                SoundController.instanceSound.PlaySingle(playerSounds[1]);
         }
     }
 
