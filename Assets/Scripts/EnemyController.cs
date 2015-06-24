@@ -9,19 +9,14 @@ public class EnemyController : MonoBehaviour {
     public GameObject attackArea;
 
     private GameController score;
-    private PlayerController playerController;
     private Rigidbody2D rb2dEnemy;
+
+    public AudioClip[] enemySounds;
 
     public Animator GetAnimatorEnemy
     {
         get { return animatorEnemy; }
         set { animatorEnemy = value; }
-    }
-
-    public PlayerController GetPlayerController
-    {
-        get { return playerController; }
-        set { playerController = value; }
     }
 
     public Rigidbody2D GetRb2dEnemy
@@ -41,11 +36,6 @@ public class EnemyController : MonoBehaviour {
         animatorEnemy = GetComponent<Animator>();
         rb2dEnemy = GetComponent<Rigidbody2D>();
         score = GameObject.Find("GameController").GetComponent<GameController>();
-        
-        if (playerController == null)
-            return;
-        else
-            playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
     
     public void Dead()
@@ -76,13 +66,10 @@ public class EnemyController : MonoBehaviour {
         if (col.tag == "DeathArea")
         {
             HurtEnemy();
-           // playerController.notMiss = true;
-
+            SoundController.instanceSound.PlaySingle(enemySounds[0]);
         }
-        if (col.tag == "DeathAreaSkill")
-        {
+        if (col.tag == "DeathAreaSkill")    
             HPEnemy = 0;
-        }
     }
     public void SetVellocity(bool left)
     {
@@ -100,13 +87,4 @@ public class EnemyController : MonoBehaviour {
             facingRight = false;
         }
     }
-    public void AttackOff()
-    {
-        attackArea.SetActive(false);
-    }
-    public void AttackOn()
-    {
-        attackArea.SetActive(true);
-    }
-
 }

@@ -47,7 +47,7 @@ public class Enemy5 : MonoBehaviour {
         {
             HurtEnemy();
             AttackOff();
-            player.notMiss = true;
+            //player.notMiss = true;
         }
         if (col.tag == "DeathAreaSkill")
         {

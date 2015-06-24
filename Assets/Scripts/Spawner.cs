@@ -8,9 +8,9 @@ public class Spawner : MonoBehaviour
 
     public Vector2 posSpawnLeft;
     public Vector2 posSpawnRight;
-
-    //public Enemy[] enemies;
-    public int index;
+    
+    public int enemiesPerWave;
+    int index;
     public GameObject[] listEnemy;
 
     float timeSpawner;
@@ -23,20 +23,17 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
-        //InvokeRepeating("Spawn", spawnDelay, spawnTime);
         StartCoroutine(Spawn());
 
     }
 
     void Update()
     {
-        //Debug.Log(count + "index" +index);
 
         if (timeSpawner>=2.0f)
         {
             timeSpawner = 0;
             Change();
-            //Spawn();
         } 
         else
             timeSpawner+=Time.deltaTime;
@@ -44,8 +41,7 @@ public class Spawner : MonoBehaviour
 
     void Change()
     {
-        //Spawn();
-        if (count >= 6)
+        if (count >= enemiesPerWave * 2)
         {
             count = 0;
             if (index >= listEnemy.Length)
@@ -56,28 +52,16 @@ public class Spawner : MonoBehaviour
         else
             return;
     }
-    //void Spawn()
-    //{   
-    //    int rand = Random.Range(1, 3);
-    //    if (rand == 1)
-    //    {
-    //        SpawnLeft(index);
-    //    }
-    //    else
-    //    {
-    //        SpawnRight(index);
-    //    }
-    //}
 
     public IEnumerator Spawn()
     {
         while (true)
         {
-            //chờ SpawnTime để ra 1 wave 3 enemy 
-            if (count == 3)
+            //Thời gian giữa từng wave 
+            if (count == enemiesPerWave)
                 yield return new WaitForSeconds(waitWaveTime);
 
-            //Chờ WaitTime để ra 1 enemy
+            //Chờ WaitTime để spawn 1 enemy
             yield return new WaitForSeconds(waitTime);
             int rand = Random.Range(1, 3);
             if (rand == 1)

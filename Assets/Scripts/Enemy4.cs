@@ -13,10 +13,8 @@ public class Enemy4 : EnemyController
         if (col.tag == "DeathArea")
         {
             HurtEnemy();
-            GetPlayerController.notMiss = true;
+            //GetPlayerController.notMiss = true;
         }
-        else
-            GetPlayerController.notMiss = false;
     }
 
     public void SetVellocity(bool left)

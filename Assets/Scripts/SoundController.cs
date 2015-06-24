@@ -1,9 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SoundController : MonoBehaviour {
+public class SoundController : MonoSingleton<SoundController> {
     public AudioSource sound;
     public static SoundController instanceSound = null;
+
+    public enum SoundType
+    {
+        //PLAYER
+        PLAYER_SWING = 0,
+        PLAYER_BREAK = 1,
+        PLAYER_ATTACKED = 2,
+        PLAYER_DEAD = 3,
+        PLAYER_SKILL = 4,
+
+        //ENEMY
+        ENEMY_ATTACKED = 5,
+        
+        //BOSS
+        BOSS_APPEAR = 6
+    }
 
     void Awake()
     {
@@ -19,8 +35,7 @@ public class SoundController : MonoBehaviour {
     public void PlaySingle(AudioClip audio)
     {
         // audio.Play();
-        sound.clip = audio;
-        sound.Play();
+        sound.PlayOneShot(audio);
     }
     public void StopSingle(AudioClip audio)
     {

@@ -23,6 +23,6 @@ public class HealthBar : MonoBehaviour {
     {
         transform.position = obj + offset;
         healthBar.material.color = Color.Lerp(Color.green, Color.yellow, 1.0f - health * 1.0f);
-        healthBar.transform.localScale = new Vector3(healthScale.x * health * 0.25f + 0.25f, 0.8f, 1.0f); 
+        healthBar.transform.localScale = new Vector3(healthScale.x * health * 0.25f + 0.25f, 0.8f, 1.0f); ;
     }
 }

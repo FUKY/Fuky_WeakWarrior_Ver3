@@ -24,7 +24,7 @@ public class BossHandController : MonoBehaviour {
     {
         rb2dHandLeft = GameObject.Find("BossLeftHand").GetComponent<Rigidbody2D>();
         rb2dHandRight = GameObject.Find("BossRightHand").GetComponent<Rigidbody2D>();
-        //rb2dHand.GetComponent<Rigidbody2D>();
+
     }
 
     void Update()
@@ -38,12 +38,11 @@ public class BossHandController : MonoBehaviour {
         {
             colPlayer = true;
             TouchPlayer(check);
-            //TouchPlayer();
         }
         if (col.tag == "DeathArea" || col.tag == "DeathAreaSkill")
         {
+            rb2dHandLeft.velocity = rb2dHandRight.velocity = Vector2.zero;
             TouchPlayerAttack(check);
-            //TouchPlayerAttack();
             bossController.HurtEnemy();
         }
     }
@@ -61,33 +60,21 @@ public class BossHandController : MonoBehaviour {
             check = false;
         }
     }
-
-    //public void AttackHand()
-    //{
-    //        rb2dHand.velocity = new Vector2(speedAttack, 0f);
-    //}
-
     void TouchPlayerAttack(bool left)
     {
         if (left)
         {
             isAttacked = true;
             rb2dHandLeft.velocity = new Vector2(-speedAttack / 2, 0f);
-            playerController.notMiss = true;
+           // playerController.attackMiss = true;
         }
         else
         {
             isAttacked = true;
             rb2dHandRight.velocity = new Vector2(speedAttack / 2, 0f);
-            playerController.notMiss = true;
+           // playerController.attackMiss = true;
         }
     }
-
-    //public void TouchPlayerAttack()
-    //{
-    //    rb2dHand.velocity = new Vector2(-speedAttack / 2, 0f);
-    //    playerController.notMiss = true;
-    //}
 
     void TouchPlayer(bool left)
     {
@@ -104,13 +91,6 @@ public class BossHandController : MonoBehaviour {
             playerController.UpdateState(playerController.state);
         }
     }  
-
-    //public void TouchPlayer()
-    //{
-    //    rb2dHand.velocity = new Vector2(-speedAttack / 2, 0f);
-    //    playerController.state--;
-    //    playerController.UpdateState(playerController.state);
-    //}
 
     void TurnBack(bool left)
     {
@@ -135,17 +115,4 @@ public class BossHandController : MonoBehaviour {
             }
         }
     }
-    //public void TurnBack()
-    //{
-    //    if ((colPlayer == true && transform.position.x <= -3f)
-    //        || (isAttacked == true && transform.position.x <= -3f)
-    //        || (colPlayer == true && transform.position.x >= 3f)
-    //        || (isAttacked == true && transform.position.x >= 3f))
-    //    {
-    //        rb2dHand.velocity = Vector2.zero;
-    //        colPlayer = false;
-    //        isAttacked = false;
-    //    }
-    //}
-	
 }

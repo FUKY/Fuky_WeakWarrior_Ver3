@@ -30,26 +30,8 @@ public class BossController : MonoBehaviour {
         {
             bossHead.velocity = Vector2.zero;
         }
-        // Attack Player
-        //if (timeWaitBossAttack >= 4)
-        //{
-        //    Attack();
-        //    timeWaitBossAttack = 0;
-        //}
-        //else
-        //    timeWaitBossAttack += Time.deltaTime;
 
 	}
-
-    //void Attack()
-    //{
-    //    int rand = Random.Range(1, 3);
-    //    if (rand == 1)
-    //        bossHandController.AttackHand(true);
-    //    if (rand == 2)
-    //        bossHandController.AttackHand(false);
-    //    //Debug.Log(rand);
-    //}
 
     public IEnumerator Attack(float timeWaitBossAttack)
     {

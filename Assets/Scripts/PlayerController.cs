@@ -24,8 +24,9 @@ public class PlayerController : MonoBehaviour
     private bool facingRight;
 
     private ButtonSkillController buttonSkill;
+    private Transform frontCheck;
 
-    public bool notMiss;
+    public bool attackMiss;
 
     private float timeAwake;
     private bool missing;
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
         attackPlayerState = Animator.StringToHash("attackPlayer");
         rb2dPlayer = GetComponent<Rigidbody2D>();
         buttonSkill = GameObject.Find("ButtonSkill").GetComponent<ButtonSkillController>();
+        frontCheck = transform.Find("FrontCheckMiss").transform;
     }
     void Update()
     {
@@ -46,12 +48,13 @@ public class PlayerController : MonoBehaviour
         {
             if (transform.position.x >= 3f)
             {
-                transform.position = new Vector2(-3f, -0.6f);
+                transform.position = new Vector2(-3.0f, 0f);
                 skilling = true;
             }
-            if (skilling == true && transform.position.x >= 0f)
+            if (skilling == true && transform.position.x >= 0f) 
             {
-                rb2dPlayer.velocity = new Vector2(0f, 0f);
+                rb2dPlayer.velocity = Vector2.zero;
+                transform.position = Vector2.zero;
                 skilling = false;
                 animatorPlayer.SetTrigger("skillPlayer");
                 animatorPlayer.speed = 1f;
@@ -62,12 +65,13 @@ public class PlayerController : MonoBehaviour
             //Bay qua trái
             if (transform.position.x <= -3f)
             {
-                transform.position = new Vector2(3f, -0.6f);
+                transform.position = new Vector2(3f, 0f);
                 skilling = true;
             }
             if (skilling == true && transform.position.x <= 0f)
             {
-                rb2dPlayer.velocity = new Vector2(0f, 0f);
+                rb2dPlayer.velocity = Vector2.zero;
+                transform.position = Vector2.zero;
                 skilling = false;
                 animatorPlayer.SetTrigger("skillPlayer");
                 animatorPlayer.speed = 1f;
@@ -80,17 +84,31 @@ public class PlayerController : MonoBehaviour
             if (timeAwake >= 0.5f)
             {
                 animatorPlayer.speed = 1f;
-                timeAwake = 0f;               
-
+                timeAwake = 0f;
+                missing = false;
             }
             else
                 timeAwake += Time.deltaTime;
         }
     }
+
+    void FixedUpdate()
+    {
+        Collider2D[] frontHits = Physics2D.OverlapCircleAll(frontCheck.position, 1.0f);
+        foreach (Collider2D col in frontHits)
+        {
+            Debug.Log(col);
+            if (col.tag == "Enemy")
+            {
+                attackMiss = false;
+            }
+            else
+                attackMiss = true;
+        }
+    }
     
     public void FlipLeft()
     {
-        SoundController.instanceSound.PlaySingle(playerSounds[2]);
         if (animatorPlayer == null)
             return;
         else
@@ -104,7 +122,6 @@ public class PlayerController : MonoBehaviour
     }
     public void FlipRight()
     {
-        SoundController.instanceSound.PlaySingle(playerSounds[2]);
         if (animatorPlayer == null)
             return;
         else
@@ -115,7 +132,23 @@ public class PlayerController : MonoBehaviour
             transform.localScale = theScale;
             facingRight = true;
         }
-    }      
+    }
+    public void AttackMiss()
+    {
+        SoundController.instanceSound.PlaySingle(playerSounds[2]);
+        if (attackMiss == true)
+        {
+            animatorPlayer.speed = 0;
+            missing = true;
+        }
+        if (attackMiss == false) 
+        {
+            animatorPlayer.speed = 1;
+            missing = false;
+            attackMiss = true;
+        }
+    }
+
     public void SkillOn()
     {
         if (buttonSkill.canSkill == true)
@@ -142,32 +175,24 @@ public class PlayerController : MonoBehaviour
             animatorPlayer.speed = 0f;
             deathAreaSkill.SetActive(true);
         }
+        
     }
-
-    public void ActtackMiss()
-    {
-        if (notMiss == false)
-        {
-            animatorPlayer.speed = 0;
-            missing = true;
-        }
-    }
-
+    
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.tag == "AttackArea")
         {
+            if (state == 1)
+                SoundController.instanceSound.PlaySingle(playerSounds[1]);
+            else
+                SoundController.instanceSound.PlaySingle(playerSounds[0]);
             state--;
             UpdateState(state);
-            SoundController.instanceSound.PlaySingle(playerSounds[0]);
-            if (state == 0)
-                SoundController.instanceSound.PlaySingle(playerSounds[1]);
         }
     }
-
     public void UpdateState(int statePlayer)
     {
-        if (statePlayer < 0)
+        if (statePlayer <= 0)
         {
             gameObject.SetActive(false);
             dead = true;
